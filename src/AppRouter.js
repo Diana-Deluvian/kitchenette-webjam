@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadRecipes } from "./features/recipes/recipesSlice";
 import Search from "./features/search/Search";
 import Recipes from "./features/recipes/Recipes";
+import AddRecipe from './features/recipes/AddRecipe'
 
 
 import LandingPage from './Components/LandingPage';
@@ -22,7 +23,8 @@ const App = () => {
         <BrowserRouter>
         <Search />
             <Routes>
-                <Route exact path="/" element={<Recipes/>}/>   
+                <Route exact path="/" element={<Recipes/>}/>
+                <Route exact path="/addRecipe" element={<AddRecipe/>}/>      
                 <Route exact path="/landingpage" element={<LandingPage/>}/>
                 <Route path="*" element={<NotFound/>}/> 
             </Routes>

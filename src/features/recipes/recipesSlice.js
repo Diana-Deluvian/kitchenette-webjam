@@ -1,12 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { selectSearchTerm } from "../search/searchSlice";
 
+const url = "http://localhost:8080";
+
 export const loadRecipes = createAsyncThunk(
   "allRecipes/getRecipes",
   async () => {
-    const data = await fetch("https://dianas-kitchenette-server.herokuapp.com/recipes");
+    const data = await fetch(`${url}/recipes`);
     const json = await data.json();
     return json;
+  }
+);
+
+
+export const createRecipe = createAsyncThunk(
+  "allRecipes/createRecipe",
+  async (state, action) => {
+    const data = await fetch(`${url}/recipe`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(state),      
+    });
+    const json = await data.json();
+    return json; 
   }
 );
 
@@ -31,6 +48,10 @@ const sliceOptions = {
     [loadRecipes.rejected]: (state, action) => {
       state.isLoading = false;
       state.hasError = true;
+    },
+
+    [createRecipe.fulfilled]: (state, action) => {
+      state.recipes.push(action.payload);
     }
   }
 }
@@ -42,7 +63,6 @@ export const selectRecipes = (state) => state.allRecipes.recipes;
 export const selectFilteredRecipes = (state) => {
   const recipes = selectRecipes(state);
   const searchTerm = selectSearchTerm(state);
-
   return recipes.filter((recipe) =>
     recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
