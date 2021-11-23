@@ -4,7 +4,7 @@ import { selectSearchTerm } from "../search/searchSlice";
 export const loadRecipes = createAsyncThunk(
   "allRecipes/getRecipes",
   async () => {
-    const data = await fetch("https://random-data-api.com/api/cannabis/random_cannabis?size=10");
+    const data = await fetch("https://dianas-kitchenette-server.herokuapp.com/recipes");
     const json = await data.json();
     return json;
   }
@@ -44,7 +44,7 @@ export const selectFilteredRecipes = (state) => {
   const searchTerm = selectSearchTerm(state);
 
   return recipes.filter((recipe) =>
-    recipe.strain.toLowerCase().includes(searchTerm.toLowerCase())
+    recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 };
 
