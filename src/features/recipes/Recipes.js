@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Recipe from "../../Components/Recipe";
 import { selectFilteredRecipes, deleteRecipe } from "./recipesSlice";
 import Spinner from "../../Components/Spinner";
+import Search from "../search/Search";
 
 
 const Recipes = () => {
@@ -21,6 +22,7 @@ const Recipes = () => {
 
   return (
     <div className="recipes-container">
+      <Search />
       {recipes.map((recipe) => (
         <Recipe recipe={recipe} key={recipe._id} handleDelete={handleDelete}>
         </Recipe>

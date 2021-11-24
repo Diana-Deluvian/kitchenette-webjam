@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import { loadRecipes } from "./features/recipes/recipesSlice";
-import Search from "./features/search/Search";
 import Recipes from "./features/recipes/Recipes";
 import AddRecipe from './features/recipes/AddRecipe';
 import EditRecipe from './features/recipes/EditRecipe';
 import Navbar from './Components/Navbar';
+import Footer from './Components/Footer';
 import About from './Components/About';
 
 
@@ -25,7 +25,6 @@ const App = () => {
     return (
         <BrowserRouter>
         <Navbar />
-        <Search />
             <Routes>
                 <Route exact path="/" element={<Recipes/>}/>
                 <Route exact path="/addRecipe" element={<AddRecipe/>}/>      
@@ -34,6 +33,7 @@ const App = () => {
                 <Route exact path="/about" element={<About />}/>
                 <Route path="*" element={<NotFound/>}/> 
             </Routes>
+        <Footer />
       </BrowserRouter>
     )
 }
