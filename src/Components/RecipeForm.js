@@ -1,27 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-const RecipeForm = (props) => {
-    const [recipe, setRecipe] = useState({});
-
-    const {name, ingredients, instructions, image } = {recipe};
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setRecipe((prevState) => ({
-          ...prevState,
-          [name]: value
-        }));
-      };
+const RecipeForm = ( props) => {
+    const [name, setName] = useState(props.recipe ? props.recipe.name : '');
+    const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : []);
+    const [instructions, setInstructions] = useState(props.recipe ? props.recipe.instructions : []);
+    
+    const handleNameChange = (e) => {
+      setName(e.target.value);
+    }
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
+        const recipe = { name, ingredients, instructions } 
+        if(props.isEditing) recipe._id = props.recipe._id;
+        console.log(recipe);
         props.handleOnSubmit(recipe);
       }
     return (
         <form onSubmit={handleOnSubmit}>
         <label>
           Recipe name
-          <textarea name="name" value={name} onChange={handleInputChange} />
+          <input name="name" value={name} onChange={handleNameChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>

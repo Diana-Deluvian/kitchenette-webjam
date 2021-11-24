@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { selectSearchTerm } from "../search/searchSlice";
 
-const url = "http://localhost:8080";
+const url = "https://dianas-kitchenette-server.herokuapp.com";
 
 export const loadRecipes = createAsyncThunk(
   "allRecipes/getRecipes",
@@ -27,6 +27,20 @@ export const createRecipe = createAsyncThunk(
   }
 );
 
+export const updateRecipe = createAsyncThunk(
+  "allRecipes/updateRecipe",
+  async(state, action) => {
+    const data = await fetch(`${url}/recipe/${state._id}`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(state),      
+    });
+    const json = await data.json();
+    return json;  
+  }
+)
+
 const sliceOptions = {
   name: "allRecipes",
   initialState: {
@@ -49,9 +63,12 @@ const sliceOptions = {
       state.isLoading = false;
       state.hasError = true;
     },
-
     [createRecipe.fulfilled]: (state, action) => {
       state.recipes.push(action.payload);
+    },
+    [updateRecipe.fulfilled]: (state, action) => {
+      state.recipes = state.recipes.filter(recipe => recipe._id !== action.payload._id);
+      state.recipes.unshift(action.payload);
     }
   }
 }
@@ -59,6 +76,8 @@ const sliceOptions = {
 export const recipesSlice = createSlice(sliceOptions);
 
 export const selectRecipes = (state) => state.allRecipes.recipes;
+
+
 
 export const selectFilteredRecipes = (state) => {
   const recipes = selectRecipes(state);
