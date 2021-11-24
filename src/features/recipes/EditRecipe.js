@@ -13,8 +13,8 @@ const EditRecipe = () => {
     const recipe = useSelector(selectRecipes).find(recipe => recipe._id === _id);
     
 
-    const handleOnSubmit = (recipe) => {
-        dispatch(updateRecipe(recipe))
+    const handleOnSubmit = async (recipe) => {
+        await dispatch(updateRecipe(recipe))
         navigate('/')
     }
 

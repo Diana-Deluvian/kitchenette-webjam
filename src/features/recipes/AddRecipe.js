@@ -10,8 +10,8 @@ const AddRecipe = () => {
     const navigate = useNavigate();
     
 
-    const handleOnSubmit = (recipe) => {
-        dispatch(createRecipe(recipe))
+    const handleOnSubmit = async (recipe) => {
+        await dispatch(createRecipe(recipe))
         navigate('/')
     }
 

@@ -41,6 +41,20 @@ export const updateRecipe = createAsyncThunk(
   }
 )
 
+export const deleteRecipe = createAsyncThunk(
+  "allRecipes/deleteRecipe",
+  async(state, action) => {
+    console.log(state, action);
+    const data = await fetch(`${url}/recipe/${state}`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {'Content-Type':'application/json'},      
+    });
+    const json = await data.json();
+    return state; 
+  }
+)
+
 const sliceOptions = {
   name: "allRecipes",
   initialState: {
@@ -69,6 +83,9 @@ const sliceOptions = {
     [updateRecipe.fulfilled]: (state, action) => {
       state.recipes = state.recipes.filter(recipe => recipe._id !== action.payload._id);
       state.recipes.unshift(action.payload);
+    },
+    [deleteRecipe.fulfilled]: (state, action) => {
+      state.recipes = state.recipes.filter(recipe => recipe._id !== action.payload);
     }
   }
 }

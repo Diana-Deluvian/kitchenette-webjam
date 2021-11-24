@@ -13,7 +13,6 @@ const RecipeForm = ( props) => {
         event.preventDefault();
         const recipe = { name, ingredients, instructions } 
         if(props.isEditing) recipe._id = props.recipe._id;
-        console.log(recipe);
         props.handleOnSubmit(recipe);
       }
     return (
