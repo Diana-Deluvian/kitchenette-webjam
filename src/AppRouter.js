@@ -8,6 +8,7 @@ import Recipes from "./features/recipes/Recipes";
 import AddRecipe from './features/recipes/AddRecipe';
 import EditRecipe from './features/recipes/EditRecipe';
 import Navbar from './Components/Navbar';
+import About from './Components/About';
 
 
 import LandingPage from './Components/LandingPage';
@@ -30,6 +31,7 @@ const App = () => {
                 <Route exact path="/addRecipe" element={<AddRecipe/>}/>      
                 <Route exact path="/editRecipe/:_id" element={<EditRecipe />} />
                 <Route exact path="/landingpage" element={<LandingPage/>}/>
+                <Route exact path="/about" element={<About />}/>
                 <Route path="*" element={<NotFound/>}/> 
             </Routes>
       </BrowserRouter>
