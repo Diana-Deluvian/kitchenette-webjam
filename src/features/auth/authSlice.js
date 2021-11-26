@@ -32,9 +32,9 @@ export const register = createAsyncThunk(
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-      isAuth: false,
+      isAuth: localStorage.getItem('token') ? true : false,
       hasError: false,
-      token: ""
+      token: localStorage.getItem('token') || '',
   },
   reducers: {},
   extraReducers: {
@@ -43,8 +43,8 @@ export const authSlice = createSlice({
       state.hasError = false;
     },
     [login.fulfilled]: (state, action) => {
-        console.log(state);
       state.token = action.payload.token;
+      localStorage.setItem('token', action.payload.token);
       state.isAuth = true;
       state.hasError = false;
     },

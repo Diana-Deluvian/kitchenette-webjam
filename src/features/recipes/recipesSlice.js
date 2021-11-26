@@ -17,8 +17,7 @@ export const loadRecipes = createAsyncThunk(
 export const createRecipe = createAsyncThunk(
   "allRecipes/createRecipe",
   async (state, action) => {
-    const globalState = action.getState();
-    const token = globalState.auth.token;
+    const { token } = action.getState().auth;
     const data = await fetch(`${url}/recipe`, {
       method: 'POST',
       credentials: 'include',
@@ -33,8 +32,7 @@ export const createRecipe = createAsyncThunk(
 export const updateRecipe = createAsyncThunk(
   "allRecipes/updateRecipe",
   async(state, action) => {
-    const globalState = action.getState();
-    const token = globalState.auth.token;
+    const { token } = action.getState().auth;
     const data = await fetch(`${url}/recipe/${state._id}`, {
       method: 'PUT',
       credentials: 'include',
@@ -49,8 +47,7 @@ export const updateRecipe = createAsyncThunk(
 export const deleteRecipe = createAsyncThunk(
   "allRecipes/deleteRecipe",
   async(state, action) => {
-    const globalState = action.getState();
-    const token = globalState.auth.token;
+    const { token } = action.getState().auth;
     const data = await fetch(`${url}/recipe/${state}`, {
       method: 'DELETE',
       credentials: 'include',
