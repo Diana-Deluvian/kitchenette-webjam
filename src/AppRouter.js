@@ -7,6 +7,7 @@ import Recipes from "./features/recipes/Recipes";
 import AddRecipe from './features/recipes/AddRecipe';
 import EditRecipe from './features/recipes/EditRecipe';
 import Auth from './features/auth/Auth';
+import SingleRecipe from './Components/SingleRecipe'
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import About from './Components/About';
@@ -29,12 +30,14 @@ const App = () => {
         <Navbar />
             <Routes>
                 <Route exact path="/" element={<Recipes/>}/>
+                <Route exact path="/recipe/:_id" element={<SingleRecipe />} />
                 <Route exact path="/addRecipe" element={<AddRecipe/>}/>      
                 <Route exact path="/editRecipe/:_id" element={<EditRecipe />} />
                 <Route exact path="/landingpage" element={<LandingPage/>}/>
                 <Route exact path="/about" element={<About />}/>
                 <Route exact path="/auth" element={<Auth/>}/>
                 <Route path="*" element={<NotFound/>}/> 
+
             </Routes>
         <Footer />
       </BrowserRouter>
