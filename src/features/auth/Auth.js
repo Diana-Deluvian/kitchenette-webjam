@@ -11,6 +11,7 @@ const Auth = () => {
 
     const handleOnSubmit = async (credentials) => {
         await dispatch(login(credentials))
+        navigate('/');
     }
 
     return (

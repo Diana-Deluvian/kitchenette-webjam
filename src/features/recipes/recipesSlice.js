@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { selectSearchTerm } from "../search/searchSlice";
+import { selectAuth } from "../auth/authSlice";
+import { useSelector } from "react-redux";
 
 const url = "https://dianas-kitchenette-server.herokuapp.com";
 
@@ -12,14 +14,15 @@ export const loadRecipes = createAsyncThunk(
   }
 );
 
-
 export const createRecipe = createAsyncThunk(
   "allRecipes/createRecipe",
   async (state, action) => {
+    const globalState = action.getState();
+    const token = globalState.auth.token;
     const data = await fetch(`${url}/recipe`, {
       method: 'POST',
       credentials: 'include',
-      headers: {'Content-Type':'application/json'},
+      headers: {'Content-Type':'application/json', "Authorization": token}, 
       body: JSON.stringify(state),      
     });
     const json = await data.json();
@@ -30,10 +33,12 @@ export const createRecipe = createAsyncThunk(
 export const updateRecipe = createAsyncThunk(
   "allRecipes/updateRecipe",
   async(state, action) => {
+    const globalState = action.getState();
+    const token = globalState.auth.token;
     const data = await fetch(`${url}/recipe/${state._id}`, {
       method: 'PUT',
       credentials: 'include',
-      headers: {'Content-Type':'application/json'},
+      headers: {'Content-Type':'application/json', "Authorization": token}, 
       body: JSON.stringify(state),      
     });
     const json = await data.json();
@@ -44,11 +49,12 @@ export const updateRecipe = createAsyncThunk(
 export const deleteRecipe = createAsyncThunk(
   "allRecipes/deleteRecipe",
   async(state, action) => {
-    console.log(state, action);
+    const globalState = action.getState();
+    const token = globalState.auth.token;
     const data = await fetch(`${url}/recipe/${state}`, {
       method: 'DELETE',
       credentials: 'include',
-      headers: {'Content-Type':'application/json'},      
+      headers: {'Content-Type':'application/json', "Authorization": token},      
     });
     const json = await data.json();
     return state; 
