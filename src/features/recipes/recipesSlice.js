@@ -21,8 +21,8 @@ export const createRecipe = createAsyncThunk(
     const data = await fetch(`${url}/recipe`, {
       method: 'POST',
       credentials: 'include',
-      headers: {'Content-Type':'application/json', "Authorization": token}, 
-      body: JSON.stringify(state),      
+      headers: { "Authorization": token}, 
+      body: state    
     });
     const json = await data.json();
     return json; 

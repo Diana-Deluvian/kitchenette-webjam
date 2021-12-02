@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 const RecipeForm = ( props) => {
     const [name, setName] = useState(props.recipe ? props.recipe.name : '');
+    const img = React.createRef(); 
     const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : []);
     const [instructions, setInstructions] = useState(props.recipe ? props.recipe.instructions : []);
     
@@ -65,15 +66,29 @@ const instructionsList = instructions
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        const recipe = { name, ingredients, instructions } 
-        if(props.isEditing) recipe._id = props.recipe._id;
-        props.handleOnSubmit(recipe);
+        let formData = new FormData();
+        const somefile = img.current.files[0];
+        formData.append("somefile", somefile);
+        formData.append("name", name);
+        formData.append("ingredients", JSON.stringify(ingredients));
+        formData.append("instructions", JSON.stringify(instructions));
+        if(props.isEditing) formData.append("_id", props.recipe._id);
+        for (var p of formData) {
+          console.log(p);
+        }
+        props.handleOnSubmit(formData); 
+
+        
       }
     return (
         <form onSubmit={handleOnSubmit}>
         <label>
           Recipe name
           <input name="name" value={name} onChange={handleNameChange} />
+        </label>
+        <label>
+          Image
+          <input type="file" ref={img} />
         </label>
         <div className="ingredients">
         {ingredientsList}
