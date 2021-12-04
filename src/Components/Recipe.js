@@ -15,6 +15,10 @@ const Recipe = ({ recipe,handleDelete, children  }) => {
         <Link to={`/editRecipe/${recipe._id}`}> Edit!</Link>
         <button onClick={(e) => handleDelete(recipe._id)}>Delete</button>
       </div>
+<button className="btn text-white bg-purple-700 hover:bg-purple-800">
+  Party with Slurm!
+</button>
+
       {children}
     </div>
     
