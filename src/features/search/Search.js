@@ -18,25 +18,37 @@ const Search = () => {
     dispatch(clearSearchTerm());
   };
 
+  const category = [`w-20 text-center py-2 
+  hover:bg-primary hover:text-white duration-300 ease-in`];
+
   return (
-    <div id="search-container">
-      <img id="search-icon" alt="search" src="" />
+    <div className="flex flex-col items-center min-w-24 mt-8 border-t-2 border-primary" id="search-container">
+      <div className="flex">
+        <span className={category}>All</span>
+        <span className={category}>Chicken</span>
+        <span className={category}>Beef</span>
+        <span className={category}>Soups</span>
+      </div>
+      <div className="flex m-2 relative border-b-2 border-primary">
       <input
         id="search"
         type="text"
         value={searchTerm}
         onChange={onSearchChangeHandler}
         placeholder="Search recipes"
+        className="text-center"
       />
       {searchTerm.length > 0 && (
         <button
           onClick={onSearchTermClearHandler}
           type="button"
           id="search-clear-button"
+          className="text-primary absolute right-2"
         >
-          <img src="" alt="clear search" />
+          X
         </button>
       )}
+      </div>
     </div>
   );
 };

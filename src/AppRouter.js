@@ -28,7 +28,7 @@ const App = () => {
     return (
         <BrowserRouter>
         <Navbar />
-        <div className="flex-grow">
+        <div className="flex flex-col items-center flex-grow">
             <Routes>
                 <Route exact path="/" element={<Recipes/>}/>
                 <Route exact path="/recipe/:_id" element={<SingleRecipe />} />
