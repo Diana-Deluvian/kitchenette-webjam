@@ -4,7 +4,7 @@ import {useNavigate, Link} from 'react-router-dom'
 const Navbar = () => {
     const navigate = useNavigate();
     return (
-        <nav className=" bg-white shadow-lg">
+        <nav className="bg-white shadow-lg">
             <div className=" flex justify-between max-w-screen-lg mx-auto">
                 <Link to="/">
                     <img className="" src="" alt="logo"/>
