@@ -7,6 +7,9 @@ module.exports = {
             'primary': '#e42116',
             'secondary': '#f24510'
       },
+      fontFamily: {
+        'emilysCandy': ['"Emilys Candy"', 'system-ui'],
+       }
     },
   },
   variants: {

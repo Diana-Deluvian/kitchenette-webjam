@@ -21,12 +21,15 @@ const Recipes = () => {
   }
 
   return (
-    <div className="recipes-container">
+    <div id="recipes-container" className="flex items-center flex-col" >
+      <h1 className="p-2 mt-4 font-emilysCandy text-primary text-6xl">Diana's Kitchenette</h1>
       <Search />
+      <div className="mt-8 grid grid-cols-3 gap-3 ">
       {recipes.map((recipe) => (
         <Recipe recipe={recipe} key={recipe._id} handleDelete={handleDelete}>
         </Recipe>
       ))}
+      </div>
     </div>
   );
 };

@@ -22,12 +22,13 @@ const Search = () => {
   hover:bg-primary hover:text-white duration-300 ease-in`];
 
   return (
-    <div className="flex flex-col items-center min-w-24 mt-8 border-t-2 border-primary" id="search-container">
+    <div className="flex flex-col items-center min-w-24 max-w-lg mt-8 border-t-2 border-primary" id="search-container">
       <div className="flex">
-        <span className={category}>All</span>
-        <span className={category}>Chicken</span>
-        <span className={category}>Beef</span>
         <span className={category}>Soups</span>
+        <span className={category}>Chicken</span>
+        <span className={category}>All</span>
+        <span className={category}>Beef</span>
+        <span className={category}>Comfort</span>
       </div>
       <div className="flex m-2 relative border-b-2 border-primary">
       <input

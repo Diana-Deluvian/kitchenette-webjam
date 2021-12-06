@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <p>Diana Deluvian, All Rights Reserved</p>
+        <p>Diana of Luvians, All Rights Reserved</p>
     )
 }
 
