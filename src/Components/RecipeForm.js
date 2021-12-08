@@ -144,7 +144,7 @@ const instructionsList = instructions
         <div className="">
         <h2 className="mb-4 text-secondary font-emilysCandy text-2xl">Instructions!</h2>
         {instructionsList}
-        <button className="bg-secondary text-white p-2 px-8 rounded" onClick={addInstruction}>Add instruction!</button>
+        <button className="bg-secondary text-white p-2 px-8 rounded cursor-pointer" onClick={addInstruction}>Add instruction!</button>
         </div>
         </div>
 
