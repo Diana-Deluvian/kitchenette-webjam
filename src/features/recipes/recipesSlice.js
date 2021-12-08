@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { selectSearchTerm } from "../search/searchSlice";
+import { selectSearchTerm, selectSearchCategory } from "../search/searchSlice";
 import { selectAuth } from "../auth/authSlice";
 import { useSelector } from "react-redux";
 
@@ -102,9 +102,18 @@ export const selectRecipes = (state) => state.allRecipes.recipes;
 export const selectFilteredRecipes = (state) => {
   const recipes = selectRecipes(state);
   const searchTerm = selectSearchTerm(state);
-  return recipes.filter((recipe) =>
+  const category = selectSearchCategory(state);
+  if(category === 'All')
+    return recipes.filter((recipe) =>
     recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  else{
+    return recipes.filter((recipe) => {
+      return recipe.category === category && recipe.name.toLowerCase().includes(searchTerm.toLowerCase() )
+    });
+    
+  }
+  
 };
 
 export default recipesSlice.reducer;
