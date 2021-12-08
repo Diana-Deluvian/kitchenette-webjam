@@ -1,14 +1,27 @@
 import React, {useState, useEffect} from 'react';
 
 const RecipeForm = ( props) => {
-    const [name, setName] = useState(props.recipe ? props.recipe.name : '');
+
+  const [recipe, setRecipe] = useState(() => {
+    return {
+      name: props.recipe ? props.recipe.name : '',
+      cookTime: props.recipe ? props.recipe.cookTime : '',
+      calories: props.recipe ? props.recipe.calories : '',
+      servings: props.recipe ? props.recipe.servings : '',
+    };
+  });
+
     const img = React.createRef(); 
     const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : []);
     const [instructions, setInstructions] = useState(props.recipe ? props.recipe.instructions : []);
     
-    const handleNameChange = (e) => {
-      setName(e.target.value);
-    }
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+          setRecipe((prevState) => ({
+            ...prevState,
+            [name]: value
+          }));
+    };
 
     function addIngredient(e) {
       e.preventDefault();
@@ -69,7 +82,11 @@ const instructionsList = instructions
         let formData = new FormData();
         const somefile = img.current.files[0];
         formData.append("somefile", somefile);
-        formData.append("name", name);
+        formData.append("name", recipe.name);
+        formData.append("cookTime", recipe.cookTime);
+        formData.append("calories", recipe.calories);
+        formData.append("servings", recipe.servings);
+        //we can't use FormData(form) because of the need to stringify
         formData.append("ingredients", JSON.stringify(ingredients));
         formData.append("instructions", JSON.stringify(instructions));
         if(props.isEditing) formData.append("_id", props.recipe._id);
@@ -84,7 +101,19 @@ const instructionsList = instructions
         <form onSubmit={handleOnSubmit}>
         <label>
           Recipe name
-          <input name="name" value={name} onChange={handleNameChange} />
+          <input name="name" value={recipe.name} onChange={handleInputChange} />
+        </label>
+        <label>
+          Cook Time
+          <input name="cookTime" value={recipe.cookTime} onChange={handleInputChange} />
+        </label>
+        <label>
+          Calories per 100g
+          <input name="calories" value={recipe.calories} onChange={handleInputChange} />
+        </label>
+        <label>
+          Servings
+          <input name="servings" value={recipe.servings} onChange={handleInputChange} />
         </label>
         <label>
           Image
