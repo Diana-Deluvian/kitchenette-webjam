@@ -12,8 +12,8 @@ const RecipeForm = ( props) => {
   });
 
     const img = React.createRef(); 
-    const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : []);
-    const [instructions, setInstructions] = useState(props.recipe ? props.recipe.instructions : []);
+    const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : ['']);
+    const [instructions, setInstructions] = useState(props.recipe ? props.recipe.instructions : ['']);
     
     const handleInputChange = (event) => {
       const { name, value } = event.target;
@@ -44,9 +44,13 @@ const RecipeForm = ( props) => {
 
   const ingredientsList = ingredients
   .map((ingredient, index) => (
-    <div key={`ingredient-${index}`} className="ingredients"index = {`test${index}`} >
-      <input data-ingredientindex={index} onChange={handleChangeIngredient} value={ingredient}></input>
-      <button data-ingredientindex={index}  onClick={deleteIngredient}>X</button>
+    <div key={`ingredient-${index}`} className="relative" index = {`test${index}`} >
+      <span> ✬</span>
+      <input data-ingredientindex={index} onChange={handleChangeIngredient} value={ingredient}
+      className="outline-none m-2 pl-2 bg-gray-300"
+      ></input>
+      <button data-ingredientindex={index}  onClick={deleteIngredient}
+      className="text-primary absolute right-4 top-2">X</button>
       </div>
   ));
 
@@ -71,9 +75,14 @@ const deleteInstruction = e => {
 
 const instructionsList = instructions
 .map((instruction, index) => (
-  <div key={`instruction-${index}`} className="instructions"index = {`test${index}`} >
-    <input data-instructionindex={index} onChange={handleChangeInstruction} value={instruction}></input>
-    <button data-instructionindex={index}  onClick={deleteInstruction}>X</button>
+  <div key={`instruction-${index}`} className="relative m-4" index = {`test${index}`} >
+    <span>{index + 1}. </span>
+    <textarea data-instructionindex={index} onChange={handleChangeInstruction} value={instruction}
+    rows="2" cols="30" className="outline-none pl-2 bg-gray-300"
+    ></textarea>
+    <button data-instructionindex={index}  onClick={deleteInstruction}
+    className="text-primary absolute right-2"
+    >X</button>
     </div>
 ));
 
@@ -126,21 +135,25 @@ const instructionsList = instructions
           className={inputClassList} />
           </div>
           </div>
-        <div className="ingredients">
+      <div className="flex mt-8">
+        <div className=" mr-12">
+          <h2 className="mb-4 text-secondary font-emilysCandy text-2xl">Ingredients!</h2>
         {ingredientsList}
-        <button onClick={addIngredient}>Add ingredient!</button>
+        <button className="bg-secondary text-white p-2 px-8 rounded" onClick={addIngredient}>Add ingredient!</button>
         </div>
-        <div className="instructionss">
+        <div className="">
+        <h2 className="mb-4 text-secondary font-emilysCandy text-2xl">Instructions!</h2>
         {instructionsList}
-        <button onClick={addInstruction}>Add instruction!</button>
+        <button className="bg-secondary text-white p-2 px-8 rounded" onClick={addInstruction}>Add instruction!</button>
+        </div>
         </div>
 
-        <div className="flex flex-col mt-4 items-center">
+        <div className="flex flex-col mt-4 items-center mb-4">
           <label>Image:</label>
           <input type="file" ref={img} className="p-2" />
           </div>
         
-        <input type="submit" value="Submit" className="w-48 p-2 rounded bg-primary text-white" />
+        <input type="submit" value="Submit" className="w-48 p-2 rounded bg-primary text-white mb-12" />
       </form>
     )
 }
