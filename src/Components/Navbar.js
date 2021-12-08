@@ -1,9 +1,15 @@
 import React from 'react';
-import {useNavigate, Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectRecipes } from '../features/recipes/recipesSlice';
 import Roast from '../roast.svg';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const recipes = useSelector(selectRecipes);
+    const RandomRecipeId = () => {
+         navigate(`/recipe/${recipes[Math.floor(Math.random() * recipes.length)]._id}`);
+    }
     return (
         <nav className="bg-white shadow-lg">
             <div className=" flex justify-between items-center max-w-screen-lg mx-auto">
@@ -11,13 +17,14 @@ const Navbar = () => {
                     <img className="w-12" src={Roast} alt="logo"/>
                 </Link>
                 <div className=" flex">
-                <Link className="p-4 hover:bg-primary hover:text-white duration-300 ease-in" to="/randomRecipes">
-                    <span className="">Recipes Suggestion </span>
-                </Link>
-                <Link className="p-4 hover:bg-primary hover:text-white duration-300 ease-in" to="/about">
+                    <span className="p-4 hover:bg-primary hover:text-white duration-300 ease-in cursor-pointer" 
+                    onClick={RandomRecipeId}>Random Recipe</span>
+                <Link className="p-4 hover:bg-primary hover:text-white duration-300 ease-in" 
+                to="/about">
                     <span className="">About </span>
                 </Link>
-                <Link className="p-4 hover:bg-primary hover:text-white duration-300 ease-in" to="/addRecipe">
+                <Link className="p-4 hover:bg-primary hover:text-white duration-300 ease-in" 
+                to="/addRecipe">
                     <span className="">Add Recipe </span>
                 </Link>
                 </div>

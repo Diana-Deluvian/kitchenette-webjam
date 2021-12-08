@@ -98,7 +98,6 @@ export const recipesSlice = createSlice(sliceOptions);
 export const selectRecipes = (state) => state.allRecipes.recipes;
 
 
-
 export const selectFilteredRecipes = (state) => {
   const recipes = selectRecipes(state);
   const searchTerm = selectSearchTerm(state);
