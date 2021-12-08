@@ -7,7 +7,7 @@ const Recipe = ({ recipe,handleDelete, children  }) => {
     <div key={recipe._id} className="recipe" tabIndex={0}>
       <div className="recipe-container">
       <Link to={`/recipe/${recipe._id}`}>
-        <h3 className="recipe-name text-center">{recipe.name}</h3>
+        <h3 className="font-emilysCandy text-2xl text-primary text-center">{recipe.name}</h3>
         <div className="image-container">
           {recipe.imgUrl &&
           <img src={recipe.imgUrl.replace('upload/', 'upload/c_fill,h_180,w_320/')} alt="recipe image" className="recipe-image" />
