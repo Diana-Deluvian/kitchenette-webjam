@@ -97,28 +97,35 @@ const instructionsList = instructions
 
         
       }
+
+      const inputClassList = `border-b-2 border-primary py-1 px-3  mb-3 text-gray-900 
+      text-center outline-none w-32`;
     return (
-        <form onSubmit={handleOnSubmit}>
-        <label>
-          Recipe name
-          <input name="name" value={recipe.name} onChange={handleInputChange} />
-        </label>
-        <label>
-          Cook Time
-          <input name="cookTime" value={recipe.cookTime} onChange={handleInputChange} />
-        </label>
-        <label>
-          Calories per 100g
-          <input name="calories" value={recipe.calories} onChange={handleInputChange} />
-        </label>
-        <label>
-          Servings
-          <input name="servings" value={recipe.servings} onChange={handleInputChange} />
-        </label>
-        <label>
-          Image
-          <input type="file" ref={img} />
-        </label>
+        <form className="w-screen-lg flex flex-col items-center text-center" onSubmit={handleOnSubmit}>
+          <h1 className="text-4xl my-6 text-primary text-center font-emilysCandy">New recipe! </h1>
+          <div className="flex flex-col items-center">
+          <label>Recipe name:</label>
+          <input name="name" value={recipe.name} onChange={handleInputChange}
+          className={`border-b-2 border-primary py-1 px-3 mb-3 text-gray-900 
+          text-center outline-none w-80`} />
+          </div>
+        <div className="flex w-full justify-content  p-3">
+          <div className="flex flex-col mx-12">
+          <label>Cook time:</label>
+          <input name="cookTime" value={recipe.cookTime} onChange={handleInputChange} placeholder="15 minutes"
+          className={inputClassList} />
+          </div>          
+          <div className="flex flex-col mx-12">
+          <label>Calories/100g:</label>
+          <input name="calories" value={recipe.calories} onChange={handleInputChange} placeholder="100"
+          className={inputClassList} />
+          </div>          
+          <div className="flex flex-col mx-12">
+          <label>Servings:</label>
+          <input name="servings" value={recipe.servings} onChange={handleInputChange} placeholder="4"
+          className={inputClassList} />
+          </div>
+          </div>
         <div className="ingredients">
         {ingredientsList}
         <button onClick={addIngredient}>Add ingredient!</button>
@@ -127,8 +134,13 @@ const instructionsList = instructions
         {instructionsList}
         <button onClick={addInstruction}>Add instruction!</button>
         </div>
+
+        <div className="flex flex-col mt-4 items-center">
+          <label>Image:</label>
+          <input type="file" ref={img} className="p-2" />
+          </div>
         
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="w-48 p-2 rounded bg-primary text-white" />
       </form>
     )
 }
