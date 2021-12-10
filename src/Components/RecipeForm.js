@@ -1,6 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../features/auth/authSlice';
 
 const RecipeForm = ( props) => {
+
+  const isAuth = useSelector(selectIsAuth);
+
 
   const [recipe, setRecipe] = useState(() => {
     return {
@@ -109,6 +115,15 @@ const instructionsList = instructions
 
       const inputClassList = `border-b-2 border-primary py-1 px-3  mb-3 text-gray-900 
       text-center outline-none w-32`;
+
+      if(!isAuth) {
+        return (
+          <div className="flex flex-col">
+            <p className="text-lg mt-8">You need to be authenticated to visit this page!</p>
+            <Link className="bg-secondary p-4 text-white rounded mt-4 w-max text-center" to="/">Back to the main website</Link>
+          </div>
+        )
+      }
     return (
         <form className="w-screen-lg flex flex-col items-center text-center" onSubmit={handleOnSubmit}>
           <h1 className="text-4xl my-6 text-primary text-center font-emilysCandy">New recipe! </h1>

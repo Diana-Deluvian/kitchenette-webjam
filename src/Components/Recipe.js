@@ -1,7 +1,10 @@
 import React from "react";
 import {Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../features/auth/authSlice';
 
-const Recipe = ({ recipe,handleDelete, children  }) => {
+const Recipe = ({ recipe,handleDelete  }) => {
+  const isAuth = useSelector(selectIsAuth);
   return (
     
     <div key={recipe._id} className="recipe" tabIndex={0}>
@@ -14,12 +17,15 @@ const Recipe = ({ recipe,handleDelete, children  }) => {
           //sneaky way of using the cloudinary service to resize the image
           }
           </div>
-        </Link>
-        <Link to={`/editRecipe/${recipe._id}`}> Edit!</Link>
-        <button onClick={(e) => handleDelete(recipe._id)}>Delete</button>
+          </Link>
+          {isAuth && 
+         <div className="flex justify-start">
+          <Link className="py-2 px-4 bg-secondary text-white rounded m-2" to={`/editRecipe/${recipe._id}`}> Edit!</Link>
+          <button className="p-2 bg-primary text-white rounded m-2" onClick={(e) => handleDelete(recipe._id)}>Delete</button>
+          </div> 
+          }
+        
       </div>
-
-      {children}
     </div>
     
   );
