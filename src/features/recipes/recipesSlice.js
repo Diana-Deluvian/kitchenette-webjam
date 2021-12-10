@@ -4,6 +4,7 @@ import { selectAuth } from "../auth/authSlice";
 import { useSelector } from "react-redux";
 
 const url = "https://dianas-kitchenette-server.herokuapp.com";
+//const url = "http://localhost:8080"
 
 export const loadRecipes = createAsyncThunk(
   "allRecipes/getRecipes",
@@ -33,11 +34,12 @@ export const updateRecipe = createAsyncThunk(
   "allRecipes/updateRecipe",
   async(state, action) => {
     const { token } = action.getState().auth;
-    const data = await fetch(`${url}/recipe/${state._id}`, {
+    const _id = state.get('_id');
+    const data = await fetch(`${url}/recipe/${_id}`, {
       method: 'PUT',
       credentials: 'include',
-      headers: {'Content-Type':'application/json', "Authorization": token}, 
-      body: JSON.stringify(state),      
+      headers: { "Authorization": token},  
+      body: state,      
     });
     const json = await data.json();
     return json;  

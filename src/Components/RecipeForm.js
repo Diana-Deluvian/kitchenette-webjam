@@ -15,11 +15,11 @@ const RecipeForm = ( props) => {
       cookTime: props.recipe ? props.recipe.cookTime : '',
       calories: props.recipe ? props.recipe.calories : '',
       servings: props.recipe ? props.recipe.servings : '',
-      category: props.recipe ? props.recipe.category : 'other',
+      category: props.recipe ? props.recipe.category : 'Other',
       cost: props.recipe ? props.recipe.cost : ''
     };
   });
-  const [categoryDropdown, setCategoryDropdown] = useState(true);
+  const [categoryDropdown, setCategoryDropdown] = useState(false);
 
     const img = React.createRef(); 
     const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : ['']);
@@ -118,17 +118,18 @@ const categoriesList = categories.map(category =>
         event.preventDefault();
         let formData = new FormData();
         const somefile = img.current.files[0];
-        formData.append("somefile", somefile);
+        if(somefile) formData.append("somefile", somefile);
         formData.append("name", recipe.name);
         formData.append("cookTime", recipe.cookTime);
         formData.append("calories", recipe.calories);
         formData.append("servings", recipe.servings);
         formData.append("cost",  recipe.cost);
         formData.append("category", recipe.category);
+        if(props.isEditing) formData.append("_id", props.recipe._id);
         //we can't use FormData(form) because of the need to stringify
         formData.append("ingredients", JSON.stringify(ingredients));
         formData.append("instructions", JSON.stringify(instructions));
-        if(props.isEditing) formData.append("_id", props.recipe._id);
+        
         for (var p of formData) {
           console.log(p);
         }
