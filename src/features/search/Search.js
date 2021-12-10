@@ -32,7 +32,7 @@ const Search = () => {
 
   return (
     <div className="flex flex-col items-center min-w-24 max-w-lg mt-8 border-t-2 border-primary" id="search-container">
-      <div className="flex">
+      <div className="flex flex-wrap justify-around">
         {categories.map(category => <span 
         onClick={onSearchCategoryChangeHandler}
         className={`${categoryClassList} 

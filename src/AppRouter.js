@@ -28,7 +28,7 @@ const App = () => {
     return (
         <BrowserRouter>
         <Navbar />
-        <div className="flex flex-col items-center flex-grow">
+        <div className="flex flex-col items-center flex-grow 2xl:text-xl">
             <Routes>
                 <Route exact path="/" element={<Recipes/>}/>
                 <Route exact path="/recipe/:_id" element={<SingleRecipe />} />
@@ -37,6 +37,7 @@ const App = () => {
                 <Route exact path="/landingpage" element={<LandingPage/>}/>
                 <Route exact path="/about" element={<About />}/>
                 <Route exact path="/auth" element={<Auth/>}/>
+                
                 <Route path="*" element={<NotFound/>}/> 
 
             </Routes>

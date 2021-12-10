@@ -13,7 +13,7 @@ const Recipe = ({ recipe,handleDelete  }) => {
         <h3 className="font-emilysCandy text-2xl text-primary text-center">{recipe.name}</h3>
         <div className="image-container">
           {recipe.imgUrl &&
-          <img src={recipe.imgUrl.replace('upload/', 'upload/c_fill,h_180,w_320/')} alt="recipe image" className="recipe-image" />
+          <img src={recipe.imgUrl.replace('upload/', 'upload/c_fill,h_270,w_480/')} alt="recipe image" className="recipe-image" />
           //sneaky way of using the cloudinary service to resize the image
           }
           </div>

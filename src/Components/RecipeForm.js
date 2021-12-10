@@ -153,7 +153,7 @@ const categoriesList = categories.map(category =>
         <form className="w-screen-lg flex flex-col items-center text-center" onSubmit={handleOnSubmit}>
           <h1 className="text-4xl my-6 text-primary text-center font-emilysCandy">New recipe! </h1>
           
-          <div className="flex w-full justify-evenly p-3">
+          <div className="flex flex-col md:flex-row w-full justify-evenly p-3">
           <div className="flex flex-col items-center">
           <label>Recipe name:</label>
           <input name="name" value={recipe.name} onChange={handleInputChange}
@@ -170,8 +170,8 @@ const categoriesList = categories.map(category =>
           }
           </div>
           </div>
-        <div className="flex w-full justify-content  p-3">
-          <div className="flex flex-col mx-12">
+        <div className="flex w-full flex-col md:flex-row justify-content items-center  p-3">
+          <div className="flex flex-col  mx-12">
           <label>Cook time:</label>
           <input name="cookTime" value={recipe.cookTime} onChange={handleInputChange} placeholder="15 minutes"
           className={inputClassList} />
@@ -192,8 +192,8 @@ const categoriesList = categories.map(category =>
           className={inputClassList} />
           </div>
           </div>
-      <div className="flex mt-8">
-        <div className=" mr-12">
+      <div className="flex flex-col justify-around items-center md:flex-row mt-8">
+        <div className="md:mr-12">
           <h2 className="mb-4 text-secondary font-emilysCandy text-2xl">Ingredients!</h2>
         {ingredientsList}
         <button className="bg-secondary text-white p-2 px-8 rounded mt-2" onClick={addIngredient}>Add ingredient!</button>
@@ -211,7 +211,7 @@ const categoriesList = categories.map(category =>
           </div>
 
         
-        <input type="submit" value="Submit" className="w-48 p-2 rounded bg-primary text-white mb-12" />
+        <input type="submit" value="Submit" className="w-48 p-2 rounded bg-primary text-white mb-12 cursor-pointer" />
       </form>
     )
 }

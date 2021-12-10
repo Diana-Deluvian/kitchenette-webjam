@@ -16,20 +16,22 @@ const Recipes = () => {
   }
 
 
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <div id="recipes-container" className="flex items-center flex-col" >
-      <h1 className="p-2 mt-4 font-emilysCandy text-primary text-6xl">Diana's Kitchenette</h1>
+      <h1 className="p-2 mt-4 font-emilysCandy text-center text-primary text-6xl">Diana's Kitchenette</h1>
       <Search />
-      <div className="mt-8 grid grid-cols-3 gap-3 ">
+      {isLoading ?
+      <Spinner />
+    :
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:max-w-screen-md 
+      2xl:gap-5 2xl:max-w-screen-xl xl:max-w-screen-lg gap-3 ">
       {recipes.map((recipe) => (
         <Recipe recipe={recipe} key={recipe._id} handleDelete={handleDelete}>
         </Recipe>
       ))}
       </div>
+      }
     </div>
   );
 };

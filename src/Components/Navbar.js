@@ -14,24 +14,24 @@ const Navbar = () => {
     }
     return (
         <nav className="bg-white shadow-lg">
-            <div className=" flex justify-between items-center max-w-screen-lg mx-auto">
+            <div className=" flex justify-between items-center max-w-screen-lg 2xl:max-w-screen-xl mx-auto">
                 <Link to="/">
-                    <img className="w-12" src={Roast} alt="logo"/>
+                    <img className="w-12 ml-4 " src={Roast} alt="logo"/>
                 </Link>
-                <div className=" flex">
-                    <span className="p-4 hover:bg-primary hover:text-white duration-300 ease-in cursor-pointer" 
+                <div className=" flex w-full sm:w-auto sm:mr-2 justify-around">
+                    <span className="p-2 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in cursor-pointer" 
                     onClick={RandomRecipeId}>Random Recipe</span>
-                <Link className="p-4 hover:bg-primary hover:text-white duration-300 ease-in" 
+                <Link className="p-2 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in" 
                 to="/about">
                     <span className="">About </span>
                 </Link>
                 { isAuth ?
-                <Link className="p-4 hover:bg-primary hover:text-white duration-300 ease-in" 
+                <Link className="p-2 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in" 
                 to="/addRecipe">
                     <span className="">Add Recipe </span>
                 </Link>
                 :
-                <Link className="p-4 hover:bg-primary hover:text-white duration-300 ease-in" 
+                <Link className="p-2 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in" 
                 to="/auth">
                     <span className="">Login</span>
                 </Link>
