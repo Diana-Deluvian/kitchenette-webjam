@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../features/auth/authSlice';
+import {  categories } from "../features/search/searchSlice";
 
 const RecipeForm = ( props) => {
 
@@ -14,8 +15,11 @@ const RecipeForm = ( props) => {
       cookTime: props.recipe ? props.recipe.cookTime : '',
       calories: props.recipe ? props.recipe.calories : '',
       servings: props.recipe ? props.recipe.servings : '',
+      category: props.recipe ? props.recipe.category : 'other',
+      cost: props.recipe ? props.recipe.cost : ''
     };
   });
+  const [categoryDropdown, setCategoryDropdown] = useState(true);
 
     const img = React.createRef(); 
     const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : ['']);
@@ -23,6 +27,7 @@ const RecipeForm = ( props) => {
     
     const handleInputChange = (event) => {
       const { name, value } = event.target;
+      console.log(name, value, event);
           setRecipe((prevState) => ({
             ...prevState,
             [name]: value
@@ -84,13 +89,30 @@ const instructionsList = instructions
   <div key={`instruction-${index}`} className="relative m-4" index = {`test${index}`} >
     <span>{index + 1}. </span>
     <textarea data-instructionindex={index} onChange={handleChangeInstruction} value={instruction}
-    rows="2" cols="30" className="outline-none pl-2 bg-gray-300"
+    rows="2" cols="30" className="outline-none pl-2 pr-4 bg-gray-300"
     ></textarea>
     <button data-instructionindex={index}  onClick={deleteInstruction}
     className="text-primary absolute right-2"
     >X</button>
     </div>
 ));
+
+const handleCategoryInput = (e) => {
+  e.preventDefault();
+  setCategoryDropdown(!categoryDropdown);
+}
+
+const handleCategoryChange = (e) => {
+  e.preventDefault();
+  setRecipe((prevState) => ({
+    ...prevState,
+    category: e.target.innerHTML
+  }));
+  setCategoryDropdown(false);
+}
+
+const categoriesList = categories.map(category => 
+  <li className="cursor-pointer py-1" onClick={handleCategoryChange}>{category}</li>)
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
@@ -101,6 +123,8 @@ const instructionsList = instructions
         formData.append("cookTime", recipe.cookTime);
         formData.append("calories", recipe.calories);
         formData.append("servings", recipe.servings);
+        formData.append("cost",  recipe.cost);
+        formData.append("category", recipe.category);
         //we can't use FormData(form) because of the need to stringify
         formData.append("ingredients", JSON.stringify(ingredients));
         formData.append("instructions", JSON.stringify(instructions));
@@ -127,11 +151,23 @@ const instructionsList = instructions
     return (
         <form className="w-screen-lg flex flex-col items-center text-center" onSubmit={handleOnSubmit}>
           <h1 className="text-4xl my-6 text-primary text-center font-emilysCandy">New recipe! </h1>
+          
+          <div className="flex w-full justify-evenly p-3">
           <div className="flex flex-col items-center">
           <label>Recipe name:</label>
           <input name="name" value={recipe.name} onChange={handleInputChange}
           className={`border-b-2 border-primary py-1 px-3 mb-3 text-gray-900 
           text-center outline-none w-80`} />
+          </div>
+          <div className="flex flex-col items-center">
+          <label>Category:</label>
+          <button onClick={handleCategoryInput} className="relative py-1 px-3 border-b-2 border-primary w-32"> {recipe.category} </button>
+          { categoryDropdown &&
+          <ul className="absolute mt-16 border border-primary px-16 py-2 z-10 bg-white">
+            {categoriesList}
+          </ul>
+          }
+          </div>
           </div>
         <div className="flex w-full justify-content  p-3">
           <div className="flex flex-col mx-12">
@@ -149,17 +185,22 @@ const instructionsList = instructions
           <input name="servings" value={recipe.servings} onChange={handleInputChange} placeholder="4"
           className={inputClassList} />
           </div>
+          <div className="flex flex-col mx-12">
+          <label>Cost(kr):</label>
+          <input name="cost" value={recipe.cost} onChange={handleInputChange} placeholder="25"
+          className={inputClassList} />
+          </div>
           </div>
       <div className="flex mt-8">
         <div className=" mr-12">
           <h2 className="mb-4 text-secondary font-emilysCandy text-2xl">Ingredients!</h2>
         {ingredientsList}
-        <button className="bg-secondary text-white p-2 px-8 rounded" onClick={addIngredient}>Add ingredient!</button>
+        <button className="bg-secondary text-white p-2 px-8 rounded mt-2" onClick={addIngredient}>Add ingredient!</button>
         </div>
         <div className="">
-        <h2 className="mb-4 text-secondary font-emilysCandy text-2xl">Instructions!</h2>
+        <h2 className="mb-6 text-secondary font-emilysCandy text-2xl">Instructions!</h2>
         {instructionsList}
-        <button className="bg-secondary text-white p-2 px-8 rounded cursor-pointer" onClick={addInstruction}>Add instruction!</button>
+        <button className="bg-secondary text-white p-2 px-8 rounded" onClick={addInstruction}>Add instruction!</button>
         </div>
         </div>
 
@@ -167,6 +208,7 @@ const instructionsList = instructions
           <label>Image:</label>
           <input type="file" ref={img} className="p-2" />
           </div>
+
         
         <input type="submit" value="Submit" className="w-48 p-2 rounded bg-primary text-white mb-12" />
       </form>
