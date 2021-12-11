@@ -56,7 +56,7 @@ const RecipeForm = ( props) => {
   const ingredientsList = ingredients
   .map((ingredient, index) => (
     <div key={`ingredient-${index}`} className="relative" index = {`test${index}`} >
-      <span> ✬</span>
+      <span className="text-secondary"> ❃</span>
       <input data-ingredientindex={index} onChange={handleChangeIngredient} value={ingredient}
       className="outline-none m-2 pl-2 bg-gray-300"
       ></input>
@@ -192,7 +192,7 @@ const categoriesList = categories.map(category =>
           className={inputClassList} />
           </div>
           </div>
-      <div className="flex flex-col justify-around items-center md:flex-row mt-8">
+      <div className="flex flex-col justify-around items-center md:items-start md:flex-row mt-8">
         <div className="md:mr-12">
           <h2 className="mb-4 text-secondary font-emilysCandy text-2xl">Ingredients!</h2>
         {ingredientsList}

@@ -27,12 +27,12 @@ const Search = () => {
     dispatch(setSearchCategory(e.target.textContent));
   }
 
-  const categoryClassList = [`w-20 text-center py-2 cursor-pointer
+  const categoryClassList = [`w-max text-center px-4 py-2 cursor-pointer
   hover:bg-primary hover:text-white duration-300 ease-in`];
 
   return (
-    <div className="flex flex-col items-center min-w-24 max-w-lg mt-8 border-t-2 border-primary" id="search-container">
-      <div className="flex flex-wrap justify-around">
+    <div className="flex flex-col w-xl items-center min-w-24 mt-8 border-t-2 border-primary" id="search-container">
+      <div className="flex flex-wrap justify-center ">
         {categories.map(category => <span 
         onClick={onSearchCategoryChangeHandler}
         className={`${categoryClassList} 
