@@ -23,6 +23,7 @@ const SingleRecipe = () => {
                     <li className="mt-4 ">Cook time: {recipe.cookTime}</li>
                     <li>Calories: {recipe.calories}kcal/100g</li>
                     <li>Servings: {recipe.servings}</li>
+                    <li>Cost: {recipe.cost}kr</li>
                     </ul>
             </div>
 

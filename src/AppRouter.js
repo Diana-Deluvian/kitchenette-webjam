@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,32 +19,32 @@ import Kitchen from './Components/Kitchen';
 import NotFound from './Components/NotFound';
 
 const App = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(loadRecipes());
-      }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadRecipes());
+  }, [dispatch]);
 
-    return (
-        <BrowserRouter>
-        <Navbar />
-        <div className="flex flex-col items-center flex-grow 2xl:text-xl">
-            <Routes>
-                <Route exact path="/" element={<Recipes/>}/>
-                <Route exact path="/recipe/:_id" element={<SingleRecipe />} />
-                <Route exact path="/addRecipe" element={<AddRecipe/>}/>      
-                <Route exact path="/editRecipe/:_id" element={<EditRecipe />} />
-                <Route exact path="/landingpage" element={<LandingPage/>}/>
-                <Route exact path="/about" element={<About />}/>
-                <Route exact path="/auth" element={<Auth/>}/>
-                
-                <Route path="*" element={<NotFound/>}/> 
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <div className="flex flex-col items-center flex-grow 2xl:text-xl">
+        <Routes>
+          <Route exact path="/" element={<Recipes />} />
+          <Route exact path="/recipe/:_id" element={<SingleRecipe />} />
+          <Route exact path="/addRecipe" element={<AddRecipe />} />
+          <Route exact path="/editRecipe/:_id" element={<EditRecipe />} />
+          //<Route exact path="/landingpage" element={<LandingPage />} />
+          <Route exact path="/about" element={<About />} />
+          <Route exact path="/auth" element={<Auth />} />
 
-            </Routes>
-            </div>
-        <Footer />
-      </BrowserRouter>
-    )
+          <Route path="*" element={<NotFound />} />
+
+        </Routes>
+      </div>
+      <Footer />
+    </BrowserRouter>
+  )
 }
 
 export default App;
