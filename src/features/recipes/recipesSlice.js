@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { selectSearchTerm, selectSearchCategory } from "../search/searchSlice";
-import { selectAuth } from "../auth/authSlice";
-import { useSelector } from "react-redux";
 
 const url = "https://dianas-kitchenette-server.herokuapp.com";
 //const url = "http://localhost:8080"
@@ -56,7 +54,7 @@ export const deleteRecipe = createAsyncThunk(
       headers: {'Content-Type':'application/json', "Authorization": token},      
     });
     const json = await data.json();
-    return state; 
+    return json; 
   }
 )
 
@@ -65,9 +63,13 @@ const sliceOptions = {
   initialState: {
     recipes: [],
     isLoading: false,
-    hasError: false
+    hasError: false,
+    isCRUDLoading: false,
+    isReqSuccess: null,
   },
-  reducers: {},
+  reducers: {
+    resetIsReqSuccess: (state) => {state.isReqSuccess = null},
+  },
   extraReducers: {
     [loadRecipes.pending]: (state, action) => {
       state.isLoading = true;
@@ -82,12 +84,28 @@ const sliceOptions = {
       state.isLoading = false;
       state.hasError = true;
     },
+    [createRecipe.pending]: (state, action) => {
+      state.isCRUDLoading = true;
+    },
     [createRecipe.fulfilled]: (state, action) => {
-      state.recipes.push(action.payload);
+      state.recipes.unshift(action.payload);
+      state.isCRUDLoading = false;
+      state.isReqSuccess = true;
+    },
+    [createRecipe.rejected]: (state, action) => {
+      state.isCRUDLoading = false;
+    },
+    [updateRecipe.pending]: (state, action) => {
+      state.isCRUDLoading = true;
     },
     [updateRecipe.fulfilled]: (state, action) => {
       state.recipes = state.recipes.filter(recipe => recipe._id !== action.payload._id);
       state.recipes.unshift(action.payload);
+      state.isCRUDLoading = false;
+      state.isReqSuccess = true;
+    },
+    [updateRecipe.rejected]: (state, action) => {
+      state.isCRUDLoading = false;
     },
     [deleteRecipe.fulfilled]: (state, action) => {
       state.recipes = state.recipes.filter(recipe => recipe._id !== action.payload);
@@ -99,6 +117,9 @@ export const recipesSlice = createSlice(sliceOptions);
 
 export const selectRecipes = (state) => state.allRecipes.recipes;
 
+export const selectIsCRUDLoading = (state) => state.allRecipes.isCRUDLoading;
+
+export const selectIsReqSuccess = (state) => state.allRecipes.isReqSuccess;
 
 export const selectFilteredRecipes = (state) => {
   const recipes = selectRecipes(state);
@@ -116,5 +137,7 @@ export const selectFilteredRecipes = (state) => {
   }
   
 };
+
+export const {resetIsReqSuccess} = recipesSlice.actions;
 
 export default recipesSlice.reducer;
