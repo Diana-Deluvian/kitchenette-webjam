@@ -1,16 +1,21 @@
 import React from 'react';
 import { Link, useNavigate} from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectRecipes } from '../features/recipes/recipesSlice';
 import Roast from '../roast.svg';
-import { selectIsAuth } from '../features/auth/authSlice';
+import { selectIsAuth, clearAuth } from '../features/auth/authSlice';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const recipes = useSelector(selectRecipes);
     const isAuth = useSelector(selectIsAuth);
     const RandomRecipeId = () => {
          navigate(`/recipe/${recipes[Math.floor(Math.random() * recipes.length)]._id}`);
+    }
+    const logOut = () => {
+        dispatch(clearAuth());
+        navigate('/');
     }
     return (
         <nav className="bg-white shadow-lg">
@@ -36,6 +41,16 @@ const Navbar = () => {
                     <span className="">Login</span>
                 </Link>
                 }
+                { isAuth ?
+                <span className="p-2 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in cursor-pointer" 
+                onClick={logOut}>Log out</span>
+                :
+                <Link className="p-2 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in" 
+                to="/auth">
+                    <span className="">Register</span>
+                </Link>
+
+                }
                 </div>
             </div>
         </nav>     
@@ -43,5 +58,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-
-//<button onClick= {() => navigate('/addrecipe') } >Add recipe</button>

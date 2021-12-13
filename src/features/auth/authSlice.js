@@ -36,7 +36,12 @@ export const authSlice = createSlice({
       hasError: false,
       token: localStorage.getItem('token') || '',
   },
-  reducers: {},
+  reducers: {
+    clearAuth: () => {
+      localStorage.removeItem('token');
+      return {isAuth: false, hasError: false, token: ''}
+    }
+  },
   extraReducers: {
     [login.pending]: (state, action) => {
       state.isAuth = false;
@@ -54,7 +59,7 @@ export const authSlice = createSlice({
 }
 });
 
-export const {} = authSlice.actions;
+export const {clearAuth} = authSlice.actions;
 
 export const selectAuth = (state) => state.auth.token;
 export const selectIsAuth = (state) => state.auth.isAuth;
