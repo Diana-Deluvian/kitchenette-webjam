@@ -21,7 +21,8 @@ const RecipeForm = ( props) => {
   });
   const [categoryDropdown, setCategoryDropdown] = useState(false);
 
-    const img = React.createRef(); 
+    const img = React.createRef();
+    const [imgName, setImgName] = useState("");
     const [ingredients, setIngredients] = useState(props.recipe ? props.recipe.ingredients : ['']);
     const [instructions, setInstructions] = useState(props.recipe ? props.recipe.instructions : ['']);
     
@@ -89,7 +90,7 @@ const instructionsList = instructions
   <div key={`instruction-${index}`} className="relative m-4" index = {`test${index}`} >
     <span>{index + 1}. </span>
     <textarea data-instructionindex={index} onChange={handleChangeInstruction} value={instruction}
-    rows="2" cols="30" className="outline-none pl-2 pr-4 bg-gray-300"
+    rows="2" className="outline-none pl-2 pr-4 bg-gray-300 md:w-80"
     ></textarea>
     <button data-instructionindex={index}  onClick={deleteInstruction}
     className="text-primary absolute right-2"
@@ -111,11 +112,16 @@ const handleCategoryChange = (e) => {
   setCategoryDropdown(false);
 }
 
+const handleImgChange = () => {
+  if(img.current.files[0].name.length > 15) setImgName(img.current.files[0].name.substring(0, 15) + '...');
+  else setImgName(img.current.files[0].name);
+}
 const categoriesList = categories.map(category => 
   <li className="cursor-pointer py-1" onClick={handleCategoryChange}>{category}</li>)
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
+        /*
         let formData = new FormData();
         const somefile = img.current.files[0];
         if(somefile) formData.append("somefile", somefile);
@@ -135,7 +141,7 @@ const categoriesList = categories.map(category =>
         }
         props.handleOnSubmit(formData); 
 
-        
+        */
       }
 
       const inputClassList = `border-b-2 border-primary py-1 px-3  mb-3 text-gray-900 
@@ -158,7 +164,7 @@ const categoriesList = categories.map(category =>
           <label>Recipe name:</label>
           <input name="name" value={recipe.name} onChange={handleInputChange}
           className={`border-b-2 border-primary py-1 px-3 mb-3 text-gray-900 
-          text-center outline-none w-80`} />
+          text-center outline-none w-60 md:w-60`} />
           </div>
           <div className="flex flex-col items-center">
           <label>Category:</label>
@@ -205,9 +211,16 @@ const categoriesList = categories.map(category =>
         </div>
         </div>
 
-        <div className="flex flex-col mt-4 items-center mb-4">
-          <label>Image:</label>
-          <input type="file" ref={img} className="p-2" />
+        <div className="flex flex-col mt-4 items-center content-center mb-4">
+          <label className="bg-secondary px-6 py-2 rounded cursor-pointer text-white">Select Image:
+          <input type="file" ref={img} onChange={handleImgChange} className="p-2 flex items-center content-center hidden" />
+          </label>
+          {imgName.length === 0 ? 
+            <p className="border-b-2 text-gray-500 border-primary w-48 mt-2">Your image here</p>
+            :
+            <p className="border-b-2 border-primary w-48 mt-2">{imgName}</p>
+          }
+          
           </div>
 
         
