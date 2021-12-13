@@ -35,33 +35,56 @@ export const authSlice = createSlice({
       isAuth: localStorage.getItem('token') ? true : false,
       hasError: false,
       token: localStorage.getItem('token') || '',
+      errorMsg: '',
+      isLoading: false
   },
   reducers: {
     clearAuth: () => {
       localStorage.removeItem('token');
       return {isAuth: false, hasError: false, token: ''}
-    }
+    },
+    resetError: () => { 
+      return {hasError:false, errorMsg: '' }}
   },
   extraReducers: {
     [login.pending]: (state, action) => {
       state.isAuth = false;
       state.hasError = false;
+      state.isLoading = true;
     },
     [login.fulfilled]: (state, action) => {
-      state.token = action.payload.token;
-      localStorage.setItem('token', action.payload.token);
-      state.isAuth = true;
-      state.hasError = false;
+      console.log(state);
+      console.log('-----------------');
+      console.log(action);
+      state.isLoading = false;
+      if(action.payload.success) {
+        state.token = action.payload.token;
+        localStorage.setItem('token', action.payload.token);
+        state.isAuth = true;
+        state.hasError = false;
+      }
+      else {
+        state.hasError = true;
+        state.errorMsg = "We were unable to authenticate you. Are you really Diana?"
+      }
+
     },
     [login.rejected]: (state, action) => {
       state.hasError = true;
+      state.errorMsg = 'There appears to be a problem with the server, please try again later.'
+      state.isLoading = false;
     }
 }
 });
 
-export const {clearAuth} = authSlice.actions;
+export const {clearAuth, resetError} = authSlice.actions;
 
 export const selectAuth = (state) => state.auth.token;
 export const selectIsAuth = (state) => state.auth.isAuth;
+export const selectIsLoading = (state) => state.auth.isLoading;
+export const selectError = (state) => { 
+  const hasError = state.auth.hasError;
+  const errorMsg = state.auth.errorMsg;
+  return {hasError, errorMsg}}
 
 export default authSlice.reducer;
