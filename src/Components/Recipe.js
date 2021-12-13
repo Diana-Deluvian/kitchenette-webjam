@@ -7,13 +7,13 @@ const Recipe = ({ recipe,handleDelete  }) => {
   const isAuth = useSelector(selectIsAuth);
   return (
     
-    <div key={recipe._id} className="recipe" tabIndex={0}>
-      <div className="recipe-container">
+    <div key={recipe._id}tabIndex={0}>
+      <div>
       <Link to={`/recipe/${recipe._id}`}>
         <h3 className="font-emilysCandy text-2xl text-primary text-center">{recipe.name}</h3>
-        <div className="image-container">
+        <div>
           {recipe.imgUrl &&
-          <img src={recipe.imgUrl.replace('upload/', 'upload/c_fill,h_270,w_480/')} alt="recipe image" className="recipe-image" />
+          <img src={recipe.imgUrl.replace('upload/', 'upload/c_fill,h_270,w_480/')} alt={recipe.name} className="recipe-image" />
           //sneaky way of using the cloudinary service to resize the image
           }
           </div>

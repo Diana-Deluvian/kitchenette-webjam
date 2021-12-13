@@ -22,7 +22,7 @@ const Auth = () => {
         return () => {
             dispatch(resetError())
         }
-    },[isAuth])
+    },[isAuth, navigate, dispatch])
 
     return (
         <AuthForm handleOnSubmit={handleOnSubmit} 

@@ -28,7 +28,6 @@ const RecipeForm = ( props) => {
     
     const handleInputChange = (event) => {
       const { name, value } = event.target;
-      console.log(name, value, event);
           setRecipe((prevState) => ({
             ...prevState,
             [name]: value
@@ -121,7 +120,7 @@ const categoriesList = categories.map(category =>
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        /*
+        
         let formData = new FormData();
         const somefile = img.current.files[0];
         if(somefile) formData.append("somefile", somefile);
@@ -135,13 +134,9 @@ const categoriesList = categories.map(category =>
         //we can't use FormData(form) because of the need to stringify
         formData.append("ingredients", JSON.stringify(ingredients));
         formData.append("instructions", JSON.stringify(instructions));
-        
-        for (var p of formData) {
-          console.log(p);
-        }
-        props.handleOnSubmit(formData); 
 
-        */
+        props.handleOnSubmit(formData); 
+        
       }
 
       const inputClassList = `border-b-2 border-primary py-1 px-3  mb-3 text-gray-900 
@@ -156,7 +151,7 @@ const categoriesList = categories.map(category =>
         )
       }
     return (
-        <form className="w-screen-lg flex flex-col items-center text-center" onSubmit={handleOnSubmit}>
+        <form className="w-screen-lg flex flex-col items-center text-center relative" onSubmit={handleOnSubmit}>
           <h1 className="text-4xl my-6 text-primary text-center font-emilysCandy">New recipe! </h1>
           
           <div className="flex flex-col md:flex-row w-full justify-evenly p-3">
@@ -224,7 +219,11 @@ const categoriesList = categories.map(category =>
           </div>
 
         
-        <input type="submit" value="Submit" className="w-48 p-2 rounded bg-primary text-white mb-12 cursor-pointer" />
+        <input type="submit" value={props.isCRUDLoading ? 'Submitting...' : 'Submit'} className="w-48 p-2 rounded bg-primary text-white mb-12 cursor-pointer" />
+        {props.isReqSuccess === false ?
+          <p className="text-primary mx-2 bottom-0 absolute">"Generic Error Message"</p>
+          : null
+          }
       </form>
     )
 }

@@ -13,7 +13,7 @@ const SingleRecipe = () => {
 
             <div className='flex flex-col md:flex-row'>
             <img alt={recipe.name} src={recipe.imgUrl} 
-            alt="recipe image" className="object-fit md:w-2/3" />
+            className="object-fit md:w-2/3" />
             <ul className="ml-4 mt-6 md:mt-0 md:w-1/3">
                 <h2 className="font-emilysCandy text-secondary text-4xl md:text-3xl mb-3 text-center">Ingredients</h2>
                 { recipe.ingredients.map(ingredient => <li className="p-0.5">

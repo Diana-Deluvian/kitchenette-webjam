@@ -53,9 +53,6 @@ export const authSlice = createSlice({
       state.isLoading = true;
     },
     [login.fulfilled]: (state, action) => {
-      console.log(state);
-      console.log('-----------------');
-      console.log(action);
       state.isLoading = false;
       if(action.payload.success) {
         state.token = action.payload.token;
