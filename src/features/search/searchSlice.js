@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const categories= ["Soups", "Pasta/Noodles", "Fresh", "All", "Oven Dishes", "Comfort", "Other"];
+export const categories= ["Soups", "Pasta/Noodles", "Fresh", 
+                          "All", "Oven Dishes", "Comfort", "Other"];
 
 export const searchSlice = createSlice({
   name: "search",

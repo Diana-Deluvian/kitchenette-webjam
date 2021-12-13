@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { loadRecipes } from "./features/recipes/recipesSlice";
 import Recipes from "./features/recipes/Recipes";
@@ -12,10 +12,7 @@ import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import About from './Components/About';
 
-
-
-import LandingPage from './Components/LandingPage';
-import Kitchen from './Components/Kitchen';
+//import LandingPage from './Components/LandingPage';
 import NotFound from './Components/NotFound';
 
 const App = () => {
@@ -34,7 +31,8 @@ const App = () => {
           <Route exact path="/recipe/:_id" element={<SingleRecipe />} />
           <Route exact path="/addRecipe" element={<AddRecipe />} />
           <Route exact path="/editRecipe/:_id" element={<EditRecipe />} />
-          //<Route exact path="/landingpage" element={<LandingPage />} />
+          {//<Route exact path="/landingpage" element={<LandingPage />} />
+          }
           <Route exact path="/about" element={<About />} />
           <Route exact path="/auth" element={<Auth />} />
 

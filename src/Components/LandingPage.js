@@ -5,9 +5,9 @@ import Roast from '../roast.svg';
 const LandingPage = () => {
     return (
         <div className="landing-page-container">
-            <img src={Blob}/>
+            <img alt="A blob that looks like the white of an egg" src={Blob}/>
             <div id="absolute">
-            <img src={Roast}/>
+            <img alt="a hot dish covered to keep warm" src={Roast}/>
             <h1>Diana's Kitchentte!</h1>
 
             </div>

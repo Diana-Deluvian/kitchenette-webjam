@@ -12,7 +12,7 @@ const SingleRecipe = () => {
             <h1 className="font-emilysCandy text-primary text-6xl my-6">{recipe.name}</h1>
 
             <div className='flex flex-col md:flex-row'>
-            <img src={recipe.imgUrl} 
+            <img alt={recipe.name} src={recipe.imgUrl} 
             alt="recipe image" className="object-fit md:w-2/3" />
             <ul className="ml-4 mt-6 md:mt-0 md:w-1/3">
                 <h2 className="font-emilysCandy text-secondary text-4xl md:text-3xl mb-3 text-center">Ingredients</h2>
