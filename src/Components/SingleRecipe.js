@@ -10,18 +10,21 @@ const SingleRecipe = () => {
   );
 
   return (
-    <div className='mx-auto max-w-screen-lg 2xl:max-w-screen-xl  flex flex-col items-center'>
+    <div className='mx-auto max-w-screen-lg 2xl:max-w-screen-xl flex flex-col items-center'>
       <h1 className='font-emilysCandy text-primary text-6xl my-6'>
         {recipe.name}
       </h1>
 
-      <div className='flex flex-col md:flex-row'>
-        <img
-          alt={recipe.name}
-          src={recipe.imgUrl}
-          className='object-fit md:w-2/3'
-        />
-        <ul className='ml-4 mt-6 md:mt-0 md:w-1/3'>
+      <div className='flex flex-col md:flex-row mx-4 lg:mx-0 '>
+        <div className='md:w-2/3'>
+          <img
+            src={recipe.imgUrl}
+            alt={recipe.name}
+            key={recipe.imgUrl}
+            className=''
+          />
+        </div>
+        <ul className='ml-4 mt-6 md:mt-0 md:w-1/3 justify-self-end'>
           <h2 className='font-emilysCandy text-secondary text-4xl md:text-3xl mb-3 text-center'>
             Ingredients
           </h2>
@@ -39,7 +42,7 @@ const SingleRecipe = () => {
         </ul>
       </div>
 
-      <ol className='self-start my-4 w-full md:w-2/3'>
+      <ol className=' self-start my-4 w-full md:w-2/3 mx-4 lg:mx-0'>
         <h2 className='text-center  font-emilysCandy text-4xl text-secondary my-4'>
           Instructions
         </h2>
@@ -52,7 +55,7 @@ const SingleRecipe = () => {
       </ol>
 
       <Link
-        className='bg-primary text-white p-2 mx-4 my-4 rounded self-start'
+        className='bg-primary text-white p-2 mx-8 my-4 lg:mx-2 rounded self-start'
         to='/'
       >
         Back to Recipes
