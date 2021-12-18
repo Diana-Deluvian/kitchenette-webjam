@@ -4,16 +4,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-            'primary': '#e42116',
-            'secondary': '#f24510'
+        primary: '#e42116',
+        secondary: '#f24510',
       },
       fontFamily: {
-        'emilysCandy': ['"Emilys Candy"', 'system-ui'],
-       }
+        emilysCandy: ['"Emilys Candy"', 'system-ui'],
+      },
+      maxWidth: {
+        '80ch': '80ch',
+      },
     },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};
