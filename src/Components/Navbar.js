@@ -25,29 +25,29 @@ const Navbar = () => {
         <Link className='hidden md:block' to='/'>
           <img className='w-12 ml-4 ' src={Roast} alt='logo' />
         </Link>
-        <div className=' flex w-full md:w-auto sm:mr-2 justify-around'>
+        <div className=' flex w-full md:w-auto sm:mr-2 justify-center'>
           <span
-            className='p-4 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in cursor-pointer'
+            className='p-2 sm:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in cursor-pointer'
             onClick={RandomRecipeId}
           >
             Random Recipe
           </span>
           <Link
-            className='p-4 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in'
+            className='p-2 sm:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in'
             to='/about'
           >
             <span className=''>About </span>
           </Link>
           {isAuth ? (
             <Link
-              className='p-4 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in'
+              className='p-2 sm:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in'
               to='/addRecipe'
             >
               <span className=''>Add Recipe </span>
             </Link>
           ) : (
             <Link
-              className='p-4 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in'
+              className='p-2 sm:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in'
               to='/auth'
             >
               <span className=''>Login</span>
@@ -55,14 +55,14 @@ const Navbar = () => {
           )}
           {isAuth ? (
             <span
-              className='p-4 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in cursor-pointer'
+              className='p-2 sm:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in cursor-pointer'
               onClick={logOut}
             >
               Log out
             </span>
           ) : (
             <Link
-              className='p-4 md:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in'
+              className='p-2 sm:p-4 w-max hover:bg-primary hover:text-white duration-300 ease-in'
               to='/register'
             >
               <span className=''>Register</span>
