@@ -40,8 +40,9 @@ export const authSlice = createSlice({
       localStorage.removeItem('token');
       return { isAuth: false, hasError: false, token: '' };
     },
-    resetError: () => {
-      return { hasError: false, errorMsg: '' };
+    resetError: (state, action) => {
+      state.errorMsg = '';
+      state.hasError = '';
     },
   },
   extraReducers: {
