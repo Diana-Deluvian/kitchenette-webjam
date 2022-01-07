@@ -2,12 +2,19 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectRecipes } from '../features/recipes/recipesSlice';
+import Spinner from './Spinner';
 
 const SingleRecipe = () => {
   const { _id } = useParams();
   const recipe = useSelector(selectRecipes).find(
     (recipe) => recipe._id === _id
   );
+  if (!recipe)
+    return (
+      <div className='mt-20'>
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className='mx-auto max-w-screen-lg 2xl:max-w-screen-xl flex flex-col items-center'>
